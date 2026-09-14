@@ -205,6 +205,32 @@
       .header-actions { position: static; margin: 4px auto 0; }
       .search-box.open { width: 200px; }
     }
+    /* Nav bar */
+    .nav-bar {
+      background: #fbf4f9;
+      border-bottom: 1px solid #f0e4ec;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: clamp(18px, 4vw, 48px);
+      padding: 12px 20px;
+      flex-wrap: wrap;
+    }
+    .nav-bar a {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 0.82rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #7b2440;
+      text-decoration: none;
+      padding: 4px 2px;
+      border-bottom: 2px solid transparent;
+      transition: border-color 0.2s ease, color 0.2s ease;
+    }
+    .nav-bar a:hover {
+      color: #9c6b93;
+      border-bottom-color: #c98ab5;
+    }
     /* Hero */
     .hero {
       background: #fff;
@@ -456,12 +482,19 @@
               <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
               <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
             </svg>
-            <span class="dot" id="bell-dot"></span>
+            <span class="dot" id="bell-dot" hidden></span>
           </button>
           <div class="bell-menu" id="bell-menu" hidden></div>
         </div>
       </div>
     </header>
+
+    <nav class="nav-bar" aria-label="Main">
+      <a href="#contact">Contact Me</a>
+      <a href="#design">Projects</a>
+      <a href="#about">About Me</a>
+      <a href="#upcoming">Upcoming Designs</a>
+    </nav>
 
     <section class="hero">
       <div class="hero-card">
@@ -477,7 +510,7 @@
 
     <section class="products" id="design">
       <h2>Design Work</h2>
-      <p class="lede">product design projects — more at yutijetani.com</p>
+      <p class="lede">product design projects</p>
 
       <div class="featured">
         <div class="featured-media">
@@ -487,7 +520,6 @@
           <p class="eyebrow">Most Recent · Product Design</p>
           <h3>ORB</h3>
           <p>Designed to blend seamlessly with your furniture, Orb elevates everyday cleaning into a considered design ritual.</p>
-          <a href="https://yutijetani.com" target="_blank" rel="noopener">More at yutijetani.com →</a>
         </div>
       </div>
 
@@ -497,7 +529,6 @@
           <div class="product-info">
             <h3>Diamonds from The Earth</h3>
             <p>Light healing love jewelry — raw stones that glow softly against the skin.</p>
-            <span class="view">More at yutijetani.com →</span>
           </div>
         </a>
         <a class="product-card" href="https://yutijetani.com" target="_blank" rel="noopener">
@@ -505,7 +536,6 @@
           <div class="product-info">
             <h3>City Chula</h3>
             <p>A cultural stove reimagined for city residents, fabricated in sheet metal.</p>
-            <span class="view">More at yutijetani.com →</span>
           </div>
         </a>
         <a class="product-card" href="https://yutijetani.com" target="_blank" rel="noopener">
@@ -513,7 +543,6 @@
           <div class="product-info">
             <h3>Stooble</h3>
             <p>Furniture for compact living — storage cube, stool, side table, or extra chair.</p>
-            <span class="view">More at yutijetani.com →</span>
           </div>
         </a>
       </div>
@@ -539,7 +568,6 @@
           <p class="eyebrow">Featured · Spring 2025</p>
           <h3>Stooble</h3>
           <p>Furniture for compact living. Designed for NYC apartments, the Stooble is an easy-access piece that shifts with your day — storage cube, stool, side table, or an extra chair when the common space fills up.</p>
-          <a href="https://yutijetani.com" target="_blank" rel="noopener">More at yutijetani.com →</a>
         </div>
       </div>
 
@@ -635,7 +663,12 @@
       </div>
     </section>
 
-    <footer>
+    <section class="about" id="upcoming">
+      <h2>Upcoming Designs</h2>
+      <p>New pieces are taking shape in the studio. Follow <a href="https://www.instagram.com/yutibyyuti/" target="_blank" rel="noopener" style="color:#9c6b93;">@yutibyyuti</a> to see them first.</p>
+    </section>
+
+    <footer id="contact">
       <p>Let's connect — <a href="mailto:yutijetaniyt@gmail.com">yutijetaniyt@gmail.com</a></p>
       <a href="https://yutijetani.com" target="_blank" rel="noopener">yutijetani.com</a> · <a href="https://www.instagram.com/yutibyyuti/" target="_blank" rel="noopener">@yutibyyuti</a>
     </footer>
@@ -665,8 +698,13 @@
       var bellDot = document.getElementById('bell-dot');
 
       // The bell shows the newest Instagram post — the first card in The Collection grid.
+      // The dot only appears when that post is newer than what this visitor last saw.
       var latest = document.querySelector('#products .product-grid .product-card');
+      var latestUrl = latest ? latest.href : '';
       if (latest) {
+        var seenUrl = null;
+        try { seenUrl = localStorage.getItem('yutea-last-seen-post'); } catch (err) {}
+        if (seenUrl !== latestUrl) bellDot.hidden = false;
         var thumb = latest.querySelector('img');
         var notif = document.createElement('a');
         notif.className = 'notif';
@@ -692,7 +730,6 @@
         bellMenu.appendChild(notif);
       } else {
         bellMenu.textContent = "You're all caught up ✨";
-        bellDot.style.display = 'none';
       }
 
       searchInput.addEventListener('input', function () {
@@ -722,7 +759,10 @@
         var open = !bellMenu.hidden;
         bellMenu.hidden = open;
         bell.setAttribute('aria-expanded', String(!open));
-        if (!open) bellDot.style.display = 'none';
+        if (!open && latestUrl) {
+          bellDot.hidden = true;
+          try { localStorage.setItem('yutea-last-seen-post', latestUrl); } catch (err) {}
+        }
       });
       document.addEventListener('click', function () {
         bellMenu.hidden = true;
