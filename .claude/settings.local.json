@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir -p \"/Users/yutijetani/yuti website/.claude\")",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(mkdir -p \"/Users/yutijetani/yuti website/maintenance\")",
+      "Bash(npm -v)",
+      "Bash(brew --version)"
+    ]
+  }
+}

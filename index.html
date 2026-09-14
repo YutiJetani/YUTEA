@@ -3,70 +3,357 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Yuti Jetani</title>
-  <meta name="description" content="Yuti Jetani — portfolio, coming soon" />
+  <title>YuTea</title>
+  <meta name="description" content="YuTea — handmade objects and jewelry by Yuti Jetani" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Josefin+Sans:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
   <style>
     * { box-sizing: border-box; }
-    html, body {
-      height: 100%;
-      margin: 0;
-    }
+    html { scroll-behavior: smooth; }
     body {
+      margin: 0;
+      background: #fdfbfd;
+      font-family: 'Playfair Display', Georgia, serif;
+      color: #3d2733;
+    }
+    .frame {
       display: flex;
       flex-direction: column;
       min-height: 100vh;
-      background: #e9dcee;
-      font-family: 'Josefin Sans', sans-serif;
+      border: 1px solid #c98ab5;
+      border-radius: 6px;
+      overflow: hidden;
+      margin: 10px;
+      background: #fff;
     }
     header {
-      background: #8f7591;
-      padding: 28px 24px;
+      background: #f6d9ec;
+      padding: 14px 24px 18px;
       text-align: center;
     }
     header h1 {
       margin: 0;
-      color: #fff;
-      font-weight: 400;
-      font-size: 2.25rem;
-      letter-spacing: 0.35em;
-      text-indent: 0.35em;
+      color: #7b2440;
+      font-weight: 600;
+      font-size: clamp(3rem, 7vw, 4.5rem);
+      line-height: 1.1;
     }
-    main {
-      flex: 1;
+    header .tagline {
+      margin: 6px 0 0;
+      color: #9c6b93;
+      font-style: italic;
+      font-size: clamp(0.95rem, 2vw, 1.15rem);
+    }
+    /* Hero */
+    .hero {
+      background: #fff;
+      padding: 28px 28px 36px;
       display: flex;
-      align-items: center;
       justify-content: center;
-      padding: 24px;
+      align-items: stretch;
+      height: calc(100vh - 200px);
+      min-height: 380px;
     }
-    .card {
-      background: #8f7591;
-      color: #fff;
-      max-width: 480px;
+    .hero-card {
       width: 100%;
-      padding: 56px 40px;
-      text-align: center;
-      border-radius: 2px;
+      max-width: 1720px;
+      border: 1px solid #d9c9d6;
+      border-radius: 18px;
+      padding: 10px;
+      background: #fff;
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-start;
+      min-height: 320px;
     }
-    .card p {
-      margin: 0;
-      font-family: 'Caveat', cursive;
-      font-weight: 700;
-      font-size: 2.75rem;
-      line-height: 1.25;
+    .hero-card img {
+      display: block;
+      width: min(38%, 520px);
+      height: auto;
+      max-height: 50%;
+      object-fit: contain;
+      object-position: left bottom;
+      margin: 0 0 3% 2%;
+    }
+    .hero-placeholder { display: none; }
+    /* Products */
+    .products {
+      padding: 24px 28px 64px;
+      max-width: 1720px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    .products h2 {
+      color: #7b2440;
+      font-weight: 600;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      text-align: center;
+      margin: 0 0 8px;
+    }
+    .products .lede {
+      text-align: center;
+      color: #8a6b7d;
+      font-size: 1rem;
+      margin: 0 0 36px;
+      font-style: italic;
+    }
+    /* Featured piece */
+    .featured {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 0;
+      border: 1px solid #d9c9d6;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #fff;
+      margin-bottom: 40px;
+    }
+    .featured video {
+      display: block;
+      width: 100%;
+      height: 100%;
+      max-height: 480px;
+      object-fit: cover;
+      background: #f6f2f5;
+    }
+    .featured-info {
+      padding: 36px 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: #fbf4f9;
+    }
+    .featured-info .eyebrow {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #9c6b93;
+      margin: 0 0 10px;
+    }
+    .featured-info h3 {
+      margin: 0 0 12px;
+      color: #7b2440;
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 600;
+    }
+    .featured-info p {
+      margin: 0 0 16px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 0.95rem;
+      color: #6d5260;
+      line-height: 1.6;
+    }
+    .featured-info a {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 0.85rem;
+      color: #9c6b93;
+      text-decoration: none;
+    }
+    .featured-info a:hover { text-decoration: underline; }
+    .featured-flip { grid-template-columns: 1fr 1.4fr; }
+    .featured-flip video { order: 2; }
+    .featured-flip .featured-info { order: 1; }
+    @media (max-width: 800px) {
+      .featured { grid-template-columns: 1fr; }
+      .featured-flip video { order: 0; }
+      .featured-flip .featured-info { order: 1; }
+    }
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 28px;
+    }
+    .product-card {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      border: 1px solid #d9c9d6;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #fff;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .product-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 28px rgba(123, 36, 64, 0.12);
+    }
+    .product-card img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+    }
+    .product-info {
+      padding: 14px 16px 18px;
+      border-top: 1px solid #f0e4ec;
+    }
+    .product-info h3 {
+      margin: 0 0 4px;
+      color: #7b2440;
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+    .product-info p {
+      margin: 0 0 8px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 0.82rem;
+      color: #8a6b7d;
+      line-height: 1.45;
+    }
+    .product-info .view {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 0.78rem;
+      color: #9c6b93;
+      letter-spacing: 0.03em;
+    }
+    footer {
+      margin-top: auto;
+      background: #9c6b93;
+      color: #fff;
+      text-align: center;
+      padding: 16px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 0.9rem;
+      letter-spacing: 0.02em;
+    }
+    @media (max-width: 600px) {
+      .hero { padding: 24px 14px; height: auto; min-height: 300px; }
+      .products { padding: 16px 14px 48px; }
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>YUTEA</h1>
-  </header>
-  <main>
-    <div class="card">
-      <p>Website under development!</p>
-    </div>
-  </main>
+  <div class="frame">
+    <header>
+      <h1>YuTea</h1>
+      <p class="tagline">a development in process</p>
+    </header>
+
+    <section class="hero">
+      <div class="hero-card">
+        <img src="images/hero.png" alt="Cheetah paw with a diamond ring perched on top" />
+      </div>
+    </section>
+
+    <section class="products" id="products">
+      <h2>The Collection</h2>
+      <p class="lede">every piece begins as a post — follow along @yutibyyuti</p>
+
+      <div class="featured">
+        <video src="images/products/khatli.mp4" poster="images/products/khatli-poster.jpg" controls preload="none" playsinline></video>
+        <div class="featured-info">
+          <p class="eyebrow">Featured · Fall 2025</p>
+          <h3>Khatli</h3>
+          <p>A sustainable take on the traditional Indian khatli — a low woven stool. Lathe-turned wooden legs with hand-painted purple detailing and a hand-wrapped yarn weave, doubling as a jewelry display.</p>
+          <a href="https://www.instagram.com/yutijetani/reel/DR5AJ5fDwRa/" target="_blank" rel="noopener">View on Instagram →</a>
+        </div>
+      </div>
+
+      <div class="featured featured-flip">
+        <video src="images/products/stooble.mp4" poster="images/products/stooble-poster.jpg" controls preload="none" playsinline></video>
+        <div class="featured-info">
+          <p class="eyebrow">Featured · Spring 2025</p>
+          <h3>Stooble</h3>
+          <p>Furniture for compact living. Designed for NYC apartments, the Stooble is an easy-access piece that shifts with your day — storage cube, stool, side table, or an extra chair when the common space fills up.</p>
+          <a href="https://yutijetani.com" target="_blank" rel="noopener">More at yutijetani.com →</a>
+        </div>
+      </div>
+
+      <div class="product-grid">
+        <a class="product-card" href="https://www.instagram.com/yutibyyuti/reel/DcGud0iymxZ/" target="_blank" rel="noopener">
+          <img src="images/products/01.jpg" alt="CNC router carving frame shapes into plywood" />
+          <div class="product-info">
+            <h3>CNC-Carved Frames</h3>
+            <p>Precision-routed plywood frames, fresh off the CNC bed. August 2026.</p>
+            <span class="view">View on Instagram →</span>
+          </div>
+        </a>
+        <a class="product-card" href="https://www.instagram.com/yutibyyuti/p/DXKJwhMgBgy/" target="_blank" rel="noopener">
+          <img src="images/products/02.jpg" alt="Sculpted clay corset with pleated shell details on a studio table" />
+          <div class="product-info">
+            <h3>Sculpted Clay Corset</h3>
+            <p>A hand-built ceramic corset study with ruffled petal detailing. April 2026.</p>
+            <span class="view">View on Instagram →</span>
+          </div>
+        </a>
+        <a class="product-card" href="https://www.instagram.com/yutibyyuti/reel/DWtwsDhABVT/" target="_blank" rel="noopener">
+          <img src="images/products/03.jpg" alt="Studio break reel — eating is my hobby" />
+          <div class="product-info">
+            <h3>Studio Diaries: Snack Edition</h3>
+            <p>Fuel for the making process. Shot mid-build in the shop. April 2026.</p>
+            <span class="view">View on Instagram →</span>
+          </div>
+        </a>
+        <a class="product-card" href="https://www.instagram.com/yutibyyuti/reel/DWhgatEAIwa/" target="_blank" rel="noopener">
+          <img src="images/products/04.jpg" alt="Matcha-bar mirror selfie after a long day in the wood shop" />
+          <div class="product-info">
+            <h3>Khatli — Part 3</h3>
+            <p>Eleven straight hours in the wood shop on the khatli build, capped with a matcha run. March 2026.</p>
+            <span class="view">View on Instagram →</span>
+          </div>
+        </a>
+        <a class="product-card" href="https://www.instagram.com/yutibyyuti/reel/DVrwUfyAAUF/" target="_blank" rel="noopener">
+          <img src="images/products/05.jpg" alt="Holding up a hand-carved ring" />
+          <div class="product-info">
+            <h3>Hand-Carved Ring</h3>
+            <p>A carved band, shaped and finished by hand. March 2026.</p>
+            <span class="view">View on Instagram →</span>
+          </div>
+        </a>
+        <a class="product-card" href="https://www.instagram.com/yutibyyuti/reel/DVXoU9WAFWs/" target="_blank" rel="noopener">
+          <img src="images/products/06.jpg" alt="Assembling the sustainable stool, part two" />
+          <div class="product-info">
+            <h3>Khatli — Part 2</h3>
+            <p>Joinery and assembly on the sustainable khatli build, begun fall 2025.</p>
+            <span class="view">View on Instagram →</span>
+          </div>
+        </a>
+        <a class="product-card" href="https://www.instagram.com/yutibyyuti/reel/DU40L-ggBrO/" target="_blank" rel="noopener">
+          <img src="images/products/07.jpg" alt="Turning a stool leg on the wood lathe" />
+          <div class="product-info">
+            <h3>Lathe-Turned Legs</h3>
+            <p>The khatli's legs taking shape on the lathe. February 2026.</p>
+            <span class="view">View on Instagram →</span>
+          </div>
+        </a>
+        <a class="product-card" href="https://www.instagram.com/yutibyyuti/reel/DUbd__tAFK8/" target="_blank" rel="noopener">
+          <img src="images/products/08.jpg" alt="Torch-melting metal in the jewelry studio" />
+          <div class="product-info">
+            <h3>My First Something</h3>
+            <p>Melting metal for a first-ever jewelry pour. February 2026.</p>
+            <span class="view">View on Instagram →</span>
+          </div>
+        </a>
+        <a class="product-card" href="https://www.instagram.com/yutijetani/reel/DSQwlwMjy_t/" target="_blank" rel="noopener">
+          <img src="images/products/09.jpg" alt="Throwing a small vase on the pottery wheel" />
+          <div class="product-info">
+            <h3>Wheel-Thrown Vase</h3>
+            <p>A little vessel coming to life on the wheel. December 2025.</p>
+            <span class="view">View on Instagram →</span>
+          </div>
+        </a>
+        <a class="product-card" href="https://www.instagram.com/yutijetani/reel/DR5AJ5fDwRa/" target="_blank" rel="noopener">
+          <img src="images/products/10.jpg" alt="The finished khatli wrapped in yarn with jewelry chains draped from it" />
+          <div class="product-info">
+            <h3>Khatli — The Reveal</h3>
+            <p>The finished khatli, wrapped in yarn and dressed in chains. Fall 2025.</p>
+            <span class="view">View on Instagram →</span>
+          </div>
+        </a>
+        <a class="product-card" href="https://www.instagram.com/yutijetani/reel/DDVzcWgxB3V/" target="_blank" rel="noopener">
+          <img src="images/products/11.jpg" alt="Blowing a kiss, wearing stacked gold cuffs" />
+          <div class="product-info">
+            <h3>After Hours</h3>
+            <p>Stacked cuffs and bracelets, worn the way they're meant to be. December 2024.</p>
+            <span class="view">View on Instagram →</span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <footer>yutijetani.com</footer>
+  </div>
 </body>
 </html>
