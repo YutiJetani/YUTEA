@@ -35,11 +35,12 @@
       padding: 14px 24px 18px;
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: center;
       gap: 20px;
       flex-wrap: wrap;
+      position: relative;
     }
-    .brand { text-align: left; }
+    .brand { text-align: center; }
     header h1 {
       margin: 0;
       color: #7b2440;
@@ -57,22 +58,36 @@
       display: flex;
       align-items: center;
       gap: 14px;
-      margin-left: auto;
+      position: absolute;
+      top: 20px;
+      right: 24px;
     }
     .search-box {
       display: flex;
       align-items: center;
-      gap: 8px;
       background: #fff;
       border: 1px solid #c98ab5;
       border-radius: 999px;
-      padding: 8px 16px;
-      min-width: 220px;
+      height: 42px;
+      padding: 0;
+      overflow: hidden;
+      transition: width 0.25s ease;
+      width: 42px;
     }
-    .search-box svg {
+    .search-box.open { width: 240px; }
+    .search-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
       flex-shrink: 0;
-      stroke: #9c6b93;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      padding: 0;
     }
+    .search-btn svg { stroke: #7b2440; }
     .search-box input {
       border: none;
       outline: none;
@@ -80,13 +95,17 @@
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       font-size: 0.9rem;
       color: #3d2733;
-      width: 100%;
+      width: 0;
+      padding: 0;
+      transition: width 0.25s ease;
     }
+    .search-box.open input { width: 100%; padding-right: 14px; }
     .search-box input::placeholder { color: #b593ab; }
-    .search-box:focus-within {
+    .search-box.open {
       border-color: #7b2440;
       box-shadow: 0 0 0 3px rgba(123, 36, 64, 0.1);
     }
+    .search-box:not(.open):hover { background: #fbf4f9; }
     .bell-btn {
       position: relative;
       display: flex;
@@ -139,10 +158,9 @@
       padding: 20px 0;
     }
     @media (max-width: 700px) {
-      header { justify-content: center; }
-      .brand { text-align: center; width: 100%; }
-      .header-actions { margin: 4px auto 0; }
-      .search-box { min-width: 0; }
+      .brand { width: 100%; }
+      .header-actions { position: static; margin: 4px auto 0; }
+      .search-box.open { width: 200px; }
     }
     /* Hero */
     .hero {
@@ -380,11 +398,13 @@
         <p class="tagline">a development in process</p>
       </div>
       <div class="header-actions">
-        <div class="search-box">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <circle cx="11" cy="11" r="8"></circle>
-            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-          </svg>
+        <div class="search-box" id="search-box">
+          <button class="search-btn" id="search-toggle" aria-label="Search" aria-expanded="false">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </button>
           <input type="search" id="site-search" placeholder="Search pieces…" aria-label="Search pieces" />
         </div>
         <div class="bell-wrap">
@@ -589,7 +609,23 @@
   <script>
     (function () {
       var searchInput = document.getElementById('site-search');
+      var searchBox = document.getElementById('search-box');
+      var searchToggle = document.getElementById('search-toggle');
       var bell = document.getElementById('bell');
+
+      searchToggle.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var open = searchBox.classList.toggle('open');
+        searchToggle.setAttribute('aria-expanded', String(open));
+        if (open) searchInput.focus();
+      });
+      searchBox.addEventListener('click', function (e) { e.stopPropagation(); });
+      document.addEventListener('click', function () {
+        if (!searchInput.value.trim()) {
+          searchBox.classList.remove('open');
+          searchToggle.setAttribute('aria-expanded', 'false');
+        }
+      });
       var bellMenu = document.getElementById('bell-menu');
       var bellDot = document.getElementById('bell-dot');
 
