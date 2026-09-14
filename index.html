@@ -155,6 +155,29 @@
       margin: 0 0 10px;
       padding: 0 4px;
     }
+    .bell-menu .notif-list {
+      max-height: 320px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .bell-menu a.notif.notif-new {
+      background: #fbf4f9;
+      position: relative;
+    }
+    .bell-menu a.notif.notif-new::after {
+      content: 'NEW';
+      font-size: 0.6rem;
+      letter-spacing: 0.08em;
+      font-weight: 600;
+      color: #fff;
+      background: #d94f70;
+      border-radius: 999px;
+      padding: 2px 7px;
+      margin-left: auto;
+      flex-shrink: 0;
+    }
     .bell-menu a.notif {
       display: flex;
       align-items: center;
@@ -697,37 +720,42 @@
       var bellMenu = document.getElementById('bell-menu');
       var bellDot = document.getElementById('bell-dot');
 
-      // The bell shows the newest Instagram post — the first card in The Collection grid.
-      // The dot only appears when that post is newer than what this visitor last saw.
-      var latest = document.querySelector('#products .product-grid .product-card');
-      var latestUrl = latest ? latest.href : '';
-      if (latest) {
+      // The bell lists every Instagram post from The Collection grid, newest first.
+      // The dot only appears when the newest post is newer than what this visitor last saw.
+      var posts = document.querySelectorAll('#products .product-grid .product-card');
+      var latestUrl = posts.length ? posts[0].href : '';
+      if (posts.length) {
         var seenUrl = null;
         try { seenUrl = localStorage.getItem('yutea-last-seen-post'); } catch (err) {}
         if (seenUrl !== latestUrl) bellDot.hidden = false;
-        var thumb = latest.querySelector('img');
-        var notif = document.createElement('a');
-        notif.className = 'notif';
-        notif.href = latest.href;
-        notif.target = '_blank';
-        notif.rel = 'noopener';
-        var notifImg = document.createElement('img');
-        notifImg.src = thumb ? thumb.src : '';
-        notifImg.alt = '';
-        var notifText = document.createElement('div');
-        var notifTitle = document.createElement('h4');
-        notifTitle.textContent = latest.querySelector('h3').textContent;
-        var notifDesc = document.createElement('p');
-        notifDesc.textContent = latest.querySelector('.product-info p').textContent;
-        notifText.appendChild(notifTitle);
-        notifText.appendChild(notifDesc);
-        notif.appendChild(notifImg);
-        notif.appendChild(notifText);
         var label = document.createElement('p');
         label.className = 'menu-label';
-        label.textContent = 'Latest on Instagram';
+        label.textContent = 'On Instagram';
         bellMenu.appendChild(label);
-        bellMenu.appendChild(notif);
+        var list = document.createElement('div');
+        list.className = 'notif-list';
+        posts.forEach(function (post, i) {
+          var thumb = post.querySelector('img');
+          var notif = document.createElement('a');
+          notif.className = 'notif' + (i === 0 ? ' notif-new' : '');
+          notif.href = post.href;
+          notif.target = '_blank';
+          notif.rel = 'noopener';
+          var notifImg = document.createElement('img');
+          notifImg.src = thumb ? thumb.src : '';
+          notifImg.alt = '';
+          var notifText = document.createElement('div');
+          var notifTitle = document.createElement('h4');
+          notifTitle.textContent = post.querySelector('h3').textContent;
+          var notifDesc = document.createElement('p');
+          notifDesc.textContent = post.querySelector('.product-info p').textContent;
+          notifText.appendChild(notifTitle);
+          notifText.appendChild(notifDesc);
+          notif.appendChild(notifImg);
+          notif.appendChild(notifText);
+          list.appendChild(notif);
+        });
+        bellMenu.appendChild(list);
       } else {
         bellMenu.textContent = "You're all caught up ✨";
       }
