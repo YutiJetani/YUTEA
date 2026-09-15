@@ -21,10 +21,11 @@
       }
     });
 
-    searchInput.addEventListener('input', function () {
-      var q = this.value.trim().toLowerCase();
-      var sections = document.querySelectorAll('.products');
-      sections.forEach(function (section) {
+    var hasProducts = document.querySelectorAll('.products').length > 0;
+
+    var applyFilter = function (q) {
+      q = q.trim().toLowerCase();
+      document.querySelectorAll('.products').forEach(function (section) {
         var items = section.querySelectorAll('.product-card, .featured');
         var anyVisible = false;
         items.forEach(function (item) {
@@ -41,7 +42,39 @@
         }
         note.style.display = anyVisible ? 'none' : 'block';
       });
-    });
+    };
+
+    if (hasProducts) {
+      searchInput.addEventListener('input', function () {
+        applyFilter(this.value);
+      });
+      // Arriving with ?q= from another page: apply it and scroll to the results.
+      var params = new URLSearchParams(window.location.search);
+      var incoming = params.get('q');
+      if (incoming) {
+        searchInput.value = incoming;
+        searchBox.classList.add('open');
+        searchToggle.setAttribute('aria-expanded', 'true');
+        applyFilter(incoming);
+        // Keep the browser's scroll restoration from clobbering the jump to results.
+        if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+        var scrollToResults = function () {
+          setTimeout(function () {
+            var firstSection = document.querySelector('.products');
+            if (firstSection) firstSection.scrollIntoView({ behavior: 'instant', block: 'start' });
+          }, 60);
+        };
+        if (document.readyState === 'complete') scrollToResults();
+        else window.addEventListener('load', scrollToResults);
+      }
+    } else {
+      // No pieces on this page — the search box is a GET form that submits
+      // to index.html?q=… on Enter; just block empty submits.
+      searchBox.addEventListener('submit', function (e) {
+        if (!searchInput.value.trim()) e.preventDefault();
+      });
+      searchInput.placeholder = 'Search pieces… (Enter)';
+    }
   }
 
   if (bell) {
