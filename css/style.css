@@ -566,16 +566,29 @@ a.featured:hover .view { text-decoration: underline; }
 }
 .swatch-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 18px;
   margin: 22px 0 28px;
 }
 .swatch {
   margin: 0;
+  padding: 0;
   border: 1px solid #d9c9d6;
   border-radius: 14px;
   overflow: hidden;
   background: #fff;
+  font: inherit;
+  cursor: pointer;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+}
+.swatch:hover { transform: translateY(-2px); box-shadow: 0 8px 18px rgba(123, 36, 64, 0.12); }
+.swatch.is-active {
+  border-color: #7b2440;
+  box-shadow: 0 0 0 3px rgba(123, 36, 64, 0.18);
+}
+.swatch:focus-visible {
+  outline: 2px solid #7b2440;
+  outline-offset: 2px;
 }
 .swatch img {
   display: block;
@@ -583,7 +596,9 @@ a.featured:hover .view { text-decoration: underline; }
   aspect-ratio: 4 / 3;
   object-fit: cover;
 }
-.swatch figcaption {
+.swatch figcaption,
+.swatch .swatch-label {
+  display: block;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   font-size: 0.8rem;
   letter-spacing: 0.06em;
@@ -594,8 +609,28 @@ a.featured:hover .view { text-decoration: underline; }
   border-top: 1px solid #f0e4ec;
   background: #fbf4f9;
 }
+.swatch.is-active .swatch-label { background: #7b2440; color: #fff; }
+.try-note {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #9c6b93;
+  margin: 18px 0 0;
+}
+.project-figure.orb-stage {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+.project-figure.orb-stage img {
+  background: none;
+  transition: opacity 0.18s ease;
+}
+.project-figure.orb-stage.swapping img { opacity: 0; }
+.project-figure.orb-stage .caption { border-top: none; }
 @media (max-width: 600px) {
-  .swatch-grid { grid-template-columns: 1fr; }
+  .swatch-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
 }
 .project-body .pull-quote {
   font-family: 'Playfair Display', Georgia, serif;

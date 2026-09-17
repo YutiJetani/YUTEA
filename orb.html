@@ -106,24 +106,29 @@
         <section class="project-section">
           <p class="section-label">05 · Materials</p>
           <h3>Finishes that match your home</h3>
-          <p>Because the shell is separate from the core, it can be finished in more than plastic. ORB's covers come in materials that belong on furniture, so it blends into a living room shelf, a kitchen counter, or a car console instead of hiding under them.</p>
-          <div class="swatch-grid">
-            <figure class="swatch">
+          <p>Because the shell is separate from the core, it can be finished in more than plastic. ORB's covers come in materials that belong on furniture — the goal is camouflage: an appliance that disappears into the sofa, the car seat, the kitchen counter, instead of hiding under them.</p>
+          <p class="try-note">Tap a material to see ORB camouflage into it.</p>
+          <div class="swatch-grid" id="orb-swatches">
+            <button type="button" class="swatch" data-ball="images/products/orb-canvas.png" data-tex="images/products/orb-mat-canvas.jpg" data-alt="ORB in woven canvas on its charging dock, camouflaged against a canvas background" data-caption="Woven canvas — ORB disappears against sofas and upholstered chairs.">
+              <img src="images/products/orb-mat-canvas.jpg" alt="Natural woven canvas texture" />
+              <span class="swatch-label">Woven Canvas</span>
+            </button>
+            <button type="button" class="swatch" data-ball="images/products/orb-leather.png" data-tex="images/products/orb-mat-leather.jpg" data-alt="ORB in pebbled black leather on its charging dock, camouflaged against a leather background" data-caption="Pebbled leather — ORB blends into car interiors and leather seating.">
               <img src="images/products/orb-mat-leather.jpg" alt="Pebbled black leather texture" />
-              <figcaption>Pebbled Leather</figcaption>
-            </figure>
-            <figure class="swatch">
-              <img src="images/products/orb-mat-cotton.jpg" alt="Woven cotton fabric with red stripes" />
-              <figcaption>Woven Cotton</figcaption>
-            </figure>
-            <figure class="swatch">
+              <span class="swatch-label">Pebbled Leather</span>
+            </button>
+            <button type="button" class="swatch is-active" data-ball="images/products/orb-fur.png" data-tex="images/products/orb-mat-fur.jpg" data-alt="ORB in soft faux fur on its charging dock, camouflaged against a fur background" data-caption="Faux fur — ORB hides among cushions, throws, and rugs.">
               <img src="images/products/orb-mat-fur.jpg" alt="Soft cream faux fur texture" />
-              <figcaption>Faux Fur</figcaption>
-            </figure>
+              <span class="swatch-label">Faux Fur</span>
+            </button>
+            <button type="button" class="swatch" data-ball="images/products/orb-cotton.png" data-tex="images/products/orb-mat-cotton.jpg" data-alt="ORB in woven cotton with red stripes on its charging dock, camouflaged against a cotton background" data-caption="Woven cotton — ORB sits camouflaged beside kitchen linens and runners.">
+              <img src="images/products/orb-mat-cotton.jpg" alt="Woven cotton fabric with red stripes" />
+              <span class="swatch-label">Woven Cotton</span>
+            </button>
           </div>
-          <div class="project-figure">
-            <img src="images/products/orb-fur.png" alt="ORB wrapped in a soft faux-fur cover, resting on its charging dock" />
-            <p class="caption">One of the swappable covers — ORB in faux fur, at home among cushions and throws.</p>
+          <div class="project-figure orb-stage" id="orb-stage" style="background-image: url('images/products/orb-mat-fur.jpg')">
+            <img id="orb-ball" src="images/products/orb-fur.png" alt="ORB in soft faux fur on its charging dock, camouflaged against a fur background" />
+            <p class="caption" id="orb-caption">Faux fur — ORB hides among cushions, throws, and rugs.</p>
           </div>
         </section>
       </div>

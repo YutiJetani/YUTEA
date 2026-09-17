@@ -133,4 +133,32 @@
       bell.setAttribute('aria-expanded', 'false');
     });
   }
+
+  // ORB material camouflage stage
+  var orbStage = document.getElementById('orb-stage');
+  if (orbStage) {
+    var orbBall = document.getElementById('orb-ball');
+    var orbCaption = document.getElementById('orb-caption');
+    var swatches = Array.prototype.slice.call(document.querySelectorAll('#orb-swatches .swatch'));
+
+    swatches.forEach(function (btn) {
+      // preload so the swap is instant
+      var pre = new Image();
+      pre.src = btn.getAttribute('data-ball');
+
+      btn.addEventListener('click', function () {
+        if (btn.classList.contains('is-active')) return;
+        swatches.forEach(function (b) { b.classList.remove('is-active'); });
+        btn.classList.add('is-active');
+        orbStage.classList.add('swapping');
+        setTimeout(function () {
+          orbBall.src = btn.getAttribute('data-ball');
+          orbBall.alt = btn.getAttribute('data-alt');
+          orbStage.style.backgroundImage = "url('" + btn.getAttribute('data-tex') + "')";
+          orbCaption.textContent = btn.getAttribute('data-caption');
+          orbStage.classList.remove('swapping');
+        }, 180);
+      });
+    });
+  }
 })();
