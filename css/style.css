@@ -12,7 +12,7 @@ body {
   min-height: 100vh;
   border: 1px solid #c98ab5;
   border-radius: 6px;
-  overflow: hidden;
+  overflow: clip; /* clip (not hidden) so the sticky footer can pin to the viewport */
   margin: 10px;
   background: #fff;
 }
@@ -728,6 +728,9 @@ footer .insta-link svg { display: block; }
 footer .insta-link:hover { opacity: 0.8; text-decoration: none; }
 footer {
   margin-top: auto;
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
   background: #9c6b93;
   color: #fff;
   display: flex;
