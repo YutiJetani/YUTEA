@@ -12,6 +12,18 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css?v=20260925" />
+  <script>
+    // Refreshing any page returns to the top of the homepage.
+    (function () {
+      try {
+        var nav = performance.getEntriesByType('navigation')[0];
+        var isHome = /\/(index\.html)?$/.test(location.pathname);
+        if (nav && nav.type === 'reload' && !isHome) { location.replace('/'); return; }
+        if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+        if (isHome && location.hash) history.replaceState(null, '', location.pathname);
+      } catch (e) {}
+    })();
+  </script>
 </head>
 <body>
   <div class="frame">
