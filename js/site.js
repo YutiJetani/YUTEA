@@ -162,3 +162,82 @@
     });
   }
 })();
+
+// Contact form: "Contact Me" opens a modal; submissions are emailed via FormSubmit.
+(function () {
+  var links = document.querySelectorAll('a[href="#contact"]');
+  if (!links.length || typeof HTMLDialogElement === 'undefined') return;
+
+  var dialog = document.createElement('dialog');
+  dialog.className = 'contact-modal';
+  dialog.setAttribute('aria-labelledby', 'contact-title');
+  dialog.innerHTML =
+    '<button type="button" class="contact-close" aria-label="Close">&times;</button>' +
+    '<h2 id="contact-title">Contact Me</h2>' +
+    '<p class="contact-sub">Leave your details and I\'ll get back to you.</p>' +
+    '<form class="contact-form" novalidate>' +
+      '<label><span>Name <em aria-hidden="true">*</em></span><input type="text" name="name" autocomplete="name" required /></label>' +
+      '<label><span>Phone number <em aria-hidden="true">*</em></span><input type="tel" name="phone" autocomplete="tel" pattern="[0-9+()\\-.\\s]{7,}" required /></label>' +
+      '<label><span>Email <em aria-hidden="true">*</em></span><input type="email" name="email" autocomplete="email" required /></label>' +
+      '<label>Comments<textarea name="comments" rows="4"></textarea></label>' +
+      '<input type="text" name="_honey" class="contact-honey" tabindex="-1" autocomplete="off" aria-hidden="true" />' +
+      '<p class="contact-status" role="status"></p>' +
+      '<button type="submit" class="contact-submit">Send</button>' +
+    '</form>';
+  document.body.appendChild(dialog);
+
+  var form = dialog.querySelector('form');
+  var status = dialog.querySelector('.contact-status');
+  var submit = dialog.querySelector('.contact-submit');
+
+  links.forEach(function (link) {
+    link.addEventListener('click', function (e) {
+      e.preventDefault();
+      status.textContent = '';
+      status.className = 'contact-status';
+      dialog.showModal();
+    });
+  });
+  dialog.querySelector('.contact-close').addEventListener('click', function () { dialog.close(); });
+  // Click on the backdrop closes it.
+  dialog.addEventListener('click', function (e) { if (e.target === dialog) dialog.close(); });
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    form.classList.add('tried');
+    if (!form.checkValidity()) {
+      status.textContent = 'Please fill in your name, a valid phone number, and email.';
+      status.className = 'contact-status error';
+      var bad = form.querySelector(':invalid');
+      if (bad) bad.focus();
+      return;
+    }
+    var data = new FormData(form);
+    data.append('_subject', 'New message from yutijetani.com');
+    data.append('_template', 'table');
+    submit.disabled = true;
+    submit.textContent = 'Sending…';
+    status.textContent = '';
+    status.className = 'contact-status';
+    fetch('https://formsubmit.co/ajax/yutijetani.creates@gmail.com', {
+      method: 'POST',
+      headers: { Accept: 'application/json' },
+      body: data
+    })
+      .then(function (res) { return res.json().then(function (j) { if (!res.ok || j.success === 'false') throw j; }); })
+      .then(function () {
+        form.reset();
+        form.classList.remove('tried');
+        status.textContent = 'Thank you! Your message has been sent.';
+        status.className = 'contact-status success';
+      })
+      .catch(function () {
+        status.textContent = 'Something went wrong. Please email yutijetani.creates@gmail.com directly.';
+        status.className = 'contact-status error';
+      })
+      .then(function () {
+        submit.disabled = false;
+        submit.textContent = 'Send';
+      });
+  });
+})();
