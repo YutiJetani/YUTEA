@@ -1125,3 +1125,15 @@ figure.lx-card.is-missing::after { content: ''; aspect-ratio: 3 / 4; background:
   .lx-chapters { gap: 4px 14px; }
   .lx-chapters a { font-size: 0.8rem; }
 }
+.contact-thanks { text-align: center; padding: 18px 8px 6px; }
+.contact-thanks-icon {
+  width: 56px; height: 56px; margin: 0 auto 14px;
+  border-radius: 50%; background: #fbf4f9; border: 2px solid #9c6b93;
+  color: #7b2440; font-size: 1.6rem; line-height: 52px;
+}
+.contact-thanks h2 { outline: none; }
+.contact-thanks p { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color: #6d5260; margin: 0 0 8px; }
+.contact-thanks p:first-of-type { font-size: 1.05rem; }
+.contact-thanks-note { font-size: 0.85rem; color: #8a6b7d !important; }
+.contact-thanks .contact-submit { margin-top: 14px; }
+.contact-modal [hidden] { display: none !important; }

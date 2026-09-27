@@ -201,21 +201,37 @@
       '<input type="text" name="_honey" class="contact-honey" tabindex="-1" autocomplete="off" aria-hidden="true" />' +
       '<p class="contact-status" role="status"></p>' +
       '<button type="submit" class="contact-submit">Send</button>' +
-    '</form>';
+    '</form>' +
+    '<div class="contact-thanks" hidden>' +
+      '<div class="contact-thanks-icon" aria-hidden="true">&#10003;</div>' +
+      '<h2 tabindex="-1">Thank you!</h2>' +
+      '<p>We will get back to you soon.</p>' +
+      '<p class="contact-thanks-note">A confirmation email is on its way to your inbox.</p>' +
+      '<button type="button" class="contact-submit contact-done">Close</button>' +
+    '</div>';
   document.body.appendChild(dialog);
 
   var form = dialog.querySelector('form');
   var status = dialog.querySelector('.contact-status');
   var submit = dialog.querySelector('.contact-submit');
+  var thanks = dialog.querySelector('.contact-thanks');
+  var formParts = [dialog.querySelector('#contact-title'), dialog.querySelector('.contact-sub'), form];
+
+  var showThanks = function (on) {
+    formParts.forEach(function (el) { el.hidden = on; });
+    thanks.hidden = !on;
+  };
 
   links.forEach(function (link) {
     link.addEventListener('click', function (e) {
       e.preventDefault();
       status.textContent = '';
       status.className = 'contact-status';
+      showThanks(false);
       dialog.showModal();
     });
   });
+  dialog.querySelector('.contact-done').addEventListener('click', function () { dialog.close(); });
   dialog.querySelector('.contact-close').addEventListener('click', function () { dialog.close(); });
   // Click on the backdrop closes it.
   dialog.addEventListener('click', function (e) { if (e.target === dialog) dialog.close(); });
@@ -233,6 +249,8 @@
     var data = new FormData(form);
     data.append('_subject', 'New message from yutijetani.com');
     data.append('_template', 'table');
+    // FormSubmit emails this back to the address the visitor typed in.
+    data.append('_autoresponse', 'Hi ' + form.elements.name.value.trim() + ',\n\nThank you for visiting my website yutijetani.com and for reaching out! I have received your message and will get back to you soon.\n\nWarmly,\nYuti Jetani\nyutijetani.com');
     submit.disabled = true;
     submit.textContent = 'Sending…';
     status.textContent = '';
@@ -246,8 +264,8 @@
       .then(function () {
         form.reset();
         form.classList.remove('tried');
-        status.textContent = 'Thank you! Your message has been sent.';
-        status.className = 'contact-status success';
+        showThanks(true);
+        thanks.querySelector('h2').focus();
       })
       .catch(function () {
         status.textContent = 'Something went wrong. Please email yutijetani.creates@gmail.com directly.';
