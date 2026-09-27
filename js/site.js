@@ -80,8 +80,10 @@
   if (bell) {
     // The bell lists every Instagram post from The Collection grid, newest first.
     // The dot only appears when the newest post is newer than what this visitor last saw.
-    var posts = document.querySelectorAll('#products .product-grid .product-card');
-    var latestUrl = posts.length ? posts[0].href : '';
+    var latestUrl = '';
+    var buildBell = function (posts) {
+    latestUrl = posts.length ? posts[0].href : '';
+    bellMenu.textContent = '';
     if (posts.length) {
       var seenUrl = null;
       try { seenUrl = localStorage.getItem('yutea-last-seen-post'); } catch (err) {}
@@ -116,6 +118,22 @@
       bellMenu.appendChild(list);
     } else {
       bellMenu.textContent = "You're all caught up ✨";
+    }
+    };
+    var postSelector = '#products .product-grid .product-card';
+    var localPosts = document.querySelectorAll(postSelector);
+    if (localPosts.length) {
+      buildBell(localPosts);
+    } else {
+      // The homepage has no collection grid; read the posts from the Updates page.
+      buildBell([]);
+      fetch('updates.html').then(function (r) { return r.text(); }).then(function (html) {
+        var doc = new DOMParser().parseFromString(html, 'text/html');
+        var base = document.createElement('base');
+        base.href = new URL('updates.html', location.href).href;
+        doc.head.appendChild(base);
+        buildBell(doc.querySelectorAll(postSelector));
+      }).catch(function () {});
     }
 
     bell.addEventListener('click', function (e) {
