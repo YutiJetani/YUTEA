@@ -1,9 +1,14 @@
+:root {
+  /* Primary: Didot (built into Apple devices); Bodoni Moda is the closest web fallback elsewhere */
+  --font-primary: 'Didot', 'Didot LT STD', 'Bodoni Moda', 'Bodoni 72', Georgia, serif;
+  --font-secondary: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body {
   margin: 0;
   background: #fdfbfd;
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: var(--font-primary);
   color: #3d2733;
 }
 .frame {
@@ -78,7 +83,7 @@ header .tagline {
   border: none;
   outline: none;
   background: transparent;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: var(--font-secondary);
   font-size: 0.9rem;
   color: #3d2733;
   width: 0;
@@ -127,7 +132,7 @@ header .tagline {
   border-radius: 12px;
   box-shadow: 0 12px 28px rgba(123, 36, 64, 0.15);
   padding: 12px;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: var(--font-secondary);
   font-size: 0.85rem;
   color: #6d5260;
   width: 280px;
@@ -187,7 +192,7 @@ header .tagline {
   font-size: 0.88rem;
   font-weight: 600;
   color: #7b2440;
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: var(--font-primary);
 }
 .bell-menu .notif p {
   margin: 0;
@@ -206,7 +211,7 @@ header .tagline {
   text-align: center;
   color: #8a6b7d;
   font-style: italic;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: var(--font-secondary);
   padding: 20px 0;
 }
 @media (max-width: 700px) {
@@ -226,7 +231,7 @@ header .tagline {
   flex-wrap: wrap;
 }
 .nav-bar a {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: var(--font-secondary);
   font-size: 0.82rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -340,7 +345,7 @@ header .tagline {
   background: #fbf4f9;
 }
 .featured-info .eyebrow {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: var(--font-secondary);
   font-size: 0.75rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -355,13 +360,13 @@ header .tagline {
 }
 .featured-info p {
   margin: 0 0 16px;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: var(--font-secondary);
   font-size: 0.95rem;
   color: #6d5260;
   line-height: 1.6;
 }
 .featured-info a {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: var(--font-secondary);
   font-size: 0.85rem;
   color: #9c6b93;
   text-decoration: none;
@@ -426,13 +431,13 @@ header .tagline {
 }
 .product-info p {
   margin: 0 0 8px;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: var(--font-secondary);
   font-size: 0.82rem;
   color: #8a6b7d;
   line-height: 1.45;
 }
 .product-info .view {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: var(--font-secondary);
   font-size: 0.78rem;
   color: #9c6b93;
   letter-spacing: 0.03em;
@@ -448,7 +453,7 @@ a.featured:hover {
   box-shadow: 0 12px 28px rgba(123, 36, 64, 0.12);
 }
 .featured-info .view {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: var(--font-secondary);
   font-size: 0.85rem;
   color: #9c6b93;
   letter-spacing: 0.03em;
@@ -462,7 +467,7 @@ a.featured:hover .view { text-decoration: underline; }
   padding: 32px 28px 64px;
 }
 .project-detail .back-link {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: var(--font-secondary);
   font-size: 0.82rem;
   letter-spacing: 0.06em;
   color: #9c6b93;
@@ -472,7 +477,7 @@ a.featured:hover .view { text-decoration: underline; }
 }
 .project-detail .back-link:hover { text-decoration: underline; }
 .project-detail .eyebrow {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: var(--font-secondary);
   font-size: 0.75rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -515,7 +520,7 @@ a.featured:hover .view { text-decoration: underline; }
 }
 .project-body h3:first-child { margin-top: 0; }
 .project-body p {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: var(--font-secondary);
   font-size: 0.98rem;
   color: #6d5260;
   line-height: 1.7;
@@ -530,7 +535,7 @@ a.featured:hover .view { text-decoration: underline; }
 .project-section:first-child { border-top: none; padding-top: 0; }
 .project-section:last-child { margin-bottom: 0; }
 .section-label {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: var(--font-secondary);
   font-size: 0.72rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
@@ -613,7 +618,7 @@ a.featured:hover .view { text-decoration: underline; }
 .swatch figcaption,
 .swatch .swatch-label {
   display: block;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: var(--font-secondary);
   font-size: 0.8rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -625,7 +630,7 @@ a.featured:hover .view { text-decoration: underline; }
 }
 .swatch.is-active .swatch-label { background: #7b2440; color: #fff; }
 .try-note {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: var(--font-secondary);
   font-size: 0.82rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -647,7 +652,7 @@ a.featured:hover .view { text-decoration: underline; }
   .swatch-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
 }
 .project-body .pull-quote {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: var(--font-primary);
   font-style: italic;
   font-size: 1.3rem;
   color: #9c6b93;
@@ -665,7 +670,7 @@ a.featured:hover .view { text-decoration: underline; }
   padding: 0;
 }
 .feature-list li {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: var(--font-secondary);
   font-size: 0.9rem;
   color: #6d5260;
   background: #fbf4f9;
@@ -719,14 +724,14 @@ a.featured:hover .view { text-decoration: underline; }
   margin-bottom: 10px;
 }
 .about p {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: var(--font-secondary);
   font-size: 1rem;
   color: #6d5260;
   line-height: 1.7;
   margin: 0 0 18px;
 }
 .about .quote {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: var(--font-primary);
   font-style: italic;
   font-size: 1.25rem;
   color: #9c6b93;
@@ -757,7 +762,7 @@ footer {
   gap: 12px;
   flex-wrap: wrap;
   padding: 16px 24px;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: var(--font-secondary);
   font-size: 0.9rem;
   letter-spacing: 0.02em;
 }
@@ -793,7 +798,7 @@ footer p { margin: 0; }
 .lomi-swatches .s3 { background: #fff; border: 1px solid #dfe4d6; }
 .lomi-wordmark {
   margin: 0;
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: var(--font-primary);
   font-size: clamp(1.9rem, 4.6vw, 3rem);
   font-weight: 700;
   line-height: 1.05;
@@ -802,7 +807,7 @@ footer p { margin: 0; }
 .lomi-wordmark em { font-style: normal; color: #6f8f6a; }
 .lomi-sub {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: var(--font-secondary);
   font-size: 0.78rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -826,14 +831,14 @@ footer p { margin: 0; }
 }
 .lomi-pillar h4 {
   margin: 0 0 8px;
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: var(--font-primary);
   font-size: 1.05rem;
   font-weight: 600;
   color: #7b2440;
 }
 .lomi-pillar p {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: var(--font-secondary);
   font-size: 0.88rem;
   color: #6d5260;
   line-height: 1.6;
@@ -884,7 +889,7 @@ footer p { margin: 0; }
   display: flex;
   flex-direction: column;
   gap: 14px;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: var(--font-secondary);
 }
 .contact-form label {
   display: flex;
@@ -947,7 +952,7 @@ footer p { margin: 0; }
   margin: 0 auto;
   width: 100%;
   padding: 28px 28px 72px;
-  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: var(--font-secondary);
   color: var(--lx-slate);
 }
 .lx p { font-size: 1rem; line-height: 1.65; margin: 0 0 14px; }
@@ -970,7 +975,7 @@ footer p { margin: 0; }
 .lx-swatches span:nth-child(3) { background: var(--lx-off); border: 1.5px solid var(--lx-teal); }
 .lx-eyebrow { font-size: 0.75rem !important; letter-spacing: 0.16em; text-transform: uppercase; color: var(--lx-slate); margin: 0 0 6px !important; }
 .lx-title h2 {
-  font-family: 'DM Sans', sans-serif;
+  font-family: var(--font-primary);
   font-weight: 700;
   font-size: clamp(3rem, 10vw, 6.4rem);
   letter-spacing: -0.03em;
@@ -990,7 +995,7 @@ footer p { margin: 0; }
 .lx-fig.is-missing::before { content: 'Image from deck'; text-align: center; font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--lx-slate); }
 .lx-fig.is-missing figcaption { background: transparent; text-align: center; }
 .lx-hero figcaption { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: flex-end; gap: 4px 14px; text-align: right; padding-top: 14px; font-size: 1rem; }
-.lx-hero figcaption strong { font-size: 1.9rem; color: var(--lx-teal); letter-spacing: -0.02em; }
+.lx-hero figcaption strong { font-family: var(--font-primary); font-size: 1.9rem; color: var(--lx-teal); letter-spacing: -0.02em; }
 
 /* Chapter nav, echoing the deck's Chapters slide */
 .lx-chapters {
@@ -1010,10 +1015,10 @@ footer p { margin: 0; }
 
 /* Chapters */
 .lx-chapter { padding: 56px 0 8px; scroll-margin-top: 70px; }
-.lx-num { font-family: 'Playfair Display', Georgia, serif; font-style: italic; font-size: 1.6rem !important; color: var(--lx-slate); margin: 0 0 4px !important; }
+.lx-num { font-family: var(--font-primary); font-style: italic; font-size: 1.6rem !important; color: var(--lx-slate); margin: 0 0 4px !important; }
 .lx-chapter h3 {
   display: inline-block;
-  font-family: 'DM Sans', sans-serif;
+  font-family: var(--font-primary);
   font-weight: 700;
   font-size: clamp(2rem, 5vw, 2.9rem);
   letter-spacing: -0.02em;
@@ -1022,7 +1027,7 @@ footer p { margin: 0; }
   padding-bottom: 4px;
   border-bottom: 3px solid var(--lx-teal);
 }
-.lx-chapter h4 { font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: 1.35rem; color: var(--lx-teal); margin: 40px 0 16px; }
+.lx-chapter h4 { font-family: var(--font-primary); font-weight: 700; font-size: 1.35rem; color: var(--lx-teal); margin: 40px 0 16px; }
 .lx-lede { font-size: 1.15rem !important; color: var(--lx-ink); max-width: 680px; }
 
 .lx-split { display: grid; grid-template-columns: 1fr 1.4fr; gap: 32px; align-items: center; margin: 8px 0 22px; }
@@ -1056,7 +1061,7 @@ figure.lx-card.is-missing::after { content: ''; aspect-ratio: 3 / 4; background:
 .lx-stat { border-radius: 26px; padding: 34px 30px; }
 .lx-stat.dark { background: #2a2f2c; color: #e9ece4; }
 .lx-stat.sage { background: var(--lx-sage); color: var(--lx-teal); }
-.lx-stat-n { display: block; font-family: 'Playfair Display', Georgia, serif; font-style: italic; font-size: 1.4rem; margin-bottom: 14px; opacity: .8; }
+.lx-stat-n { display: block; font-family: var(--font-primary); font-style: italic; font-size: 1.4rem; margin-bottom: 14px; opacity: .8; }
 .lx-stat .big { font-size: 1.45rem !important; font-weight: 600; line-height: 1.25 !important; }
 .lx-stat p { color: inherit; font-size: 0.92rem; }
 .lx-stat em { font-style: normal; font-weight: 700; }
@@ -1136,7 +1141,7 @@ figure.lx-card.is-missing::after { content: ''; aspect-ratio: 3 / 4; background:
   color: #7b2440; font-size: 1.6rem; line-height: 52px;
 }
 .contact-thanks h2 { outline: none; }
-.contact-thanks p { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color: #6d5260; margin: 0 0 8px; }
+.contact-thanks p { font-family: var(--font-secondary); color: #6d5260; margin: 0 0 8px; }
 .contact-thanks p:first-of-type { font-size: 1.05rem; }
 .contact-thanks-note { font-size: 0.85rem; color: #8a6b7d !important; }
 .contact-thanks .contact-submit { margin-top: 14px; }
